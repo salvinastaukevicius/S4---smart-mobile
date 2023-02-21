@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>text</h1>
+    <h1 id="steps"></h1>
 </body>
 
 
@@ -30,5 +30,58 @@
         }
       }
     }
+
+    // Set the time range for which you want to get the data
+var endTimeMillis = new Date().getTime();
+var startTimeMillis = 1676674800000; // 24 hours ago
+
+// Set up the request body
+var requestBody = {
+  "aggregateBy": [{
+    "dataTypeName": "com.google.step_count.delta",
+    "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
+  }],
+  "bucketByTime": { "durationMillis": 86400000 },
+  "startTimeMillis": startTimeMillis,
+  "endTimeMillis": endTimeMillis
+};
+
+// Make the API request
+fetch("https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + "ya29.a0AVvZVsp8wLq1ZLlcnmgq_K1NMtYzicAeLJKCramWJxKlV0k5BXHmdZ8oGig1am7CQdoKs69jMQ8eyQBWf8aLZp-8NFszU-68r4tmgqwgvy9V3HHJUFOjY_zcdVcC1_m0HQdFvBoJldFZxri__0YZbQtFjUfItjUaCgYKAVwSAQASFQGbdwaIcVnapX3DtSCyvRrLa_-iWw0166"
+  },
+  body: JSON.stringify(requestBody)
+})
+.then(response => response.json())
+.then(data => {
+  // Handle the API response
+  console.log(data);
+  var steps = data.bucket[0].dataset[0].point[0].value[0].intVal;
+  var stepsElement = document.getElementById("steps");
+  stepsElement.innerHTML = "Steps: " + steps;
+  console.log(steps);
+})
+.catch(error => {
+  // Handle errors
+  console.error(error);
+});
+
+// Assume the data returned from the API is stored in a variable called `data`
+
+// Get the HTML element where you want to display the steps
+var stepsElement = document.getElementById("steps");
+
+// Extract the steps data from the API response
+
+
+// Display the steps in the HTML element
+stepsElement.innerHTML = "Steps: " + steps;
+
+console.log(steps);
+
+
  </script>
 </html>

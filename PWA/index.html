@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>Authorization page</title>
+</head>
+<body>
+    
+</body>
+
+
+<script>
+    window.addEventListener('load', () => {
+      registerSW();
+    });
+ 
+    // Register the Service Worker
+    async function registerSW() {
+      if ('serviceWorker' in navigator) {
+        try {
+          await navigator
+                .serviceWorker
+                .register('serviceworker.js');
+        }
+        catch (e) {
+          console.log('SW registration failed');
+        }
+      }
+    }
+
+   
+var client_id = "643398672506-a5k2fjtmk0hsljf90qli3jiibebalpok.apps.googleusercontent.com";
+var client_secret = "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";
+
+
+var redirect_uri = "http://localhost:5500/pwa/redirect.html"; 
+// var redirect_uri = "https://i481136.hera.fhict.nl/redirect.html"; 
+var scope = "https://www.googleapis.com/auth/fitness.activity.read"; //scope for activity data like steps taken and distance traveled
+
+// Redirect the user to the authorization endpoint
+var authUrl = "https://accounts.google.com/o/oauth2/auth?" +
+  "response_type=code" +
+  "&client_id=" + client_id +
+  "&redirect_uri=" + encodeURIComponent(redirect_uri) +
+  "&scope=" + encodeURIComponent(scope);
+
+window.location.href = authUrl;
+
+
+
+
+
+  
+  
+
+
+
+
+ </script>
+</html>
