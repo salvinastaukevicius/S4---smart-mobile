@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="redirect.css" />
     <title>Document</title>
   </head>
   <body>
@@ -21,8 +21,8 @@
         client_id:
           "643398672506-a5k2fjtmk0hsljf90qli3jiibebalpok.apps.googleusercontent.com",
         client_secret: "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",
-        redirect_uri: "http://localhost:5500/pwa/redirect.html",
-        //   redirect_uri: 'https://i481136.hera.fhict.nl/redirect.html',
+        // redirect_uri: "http://localhost:5500/pwa/redirect.html",
+          redirect_uri: 'https://i481136.hera.fhict.nl/redirect.html',
         grant_type: "authorization_code",
       };
 
@@ -35,12 +35,12 @@
       })
         .then((response) => response.json())
         .then((data) => {
+
           const accessToken = data.access_token;
-          localStorage.setItem('token', accessToken)
           caloriesData(accessToken);
           stepsData(accessToken);
+          
         });
-
       //getting fitness data
 
       var endTimeMillis = new Date().getTime(); //right now
@@ -52,8 +52,15 @@
       
 
       function caloriesData(data) {
-        mydata = data;
-        console.log("Access token:", mydata);
+
+        if (typeof data!== 'undefined') {
+            mydata = data;
+            localStorage.setItem('thetoken', mydata);
+        } else {
+
+        }
+
+        console.log("Access token:", localStorage.getItem('thetoken'));
 
         fetch(
           "https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate",
@@ -61,7 +68,7 @@
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer " + mydata,
+              Authorization: "Bearer " + localStorage.getItem('thetoken'),
             },
             body: JSON.stringify(requestBody_calories),
           }
@@ -83,8 +90,15 @@
       }
 
       function stepsData(data) {
-        mydata = data;
-        console.log("Access token:", mydata);
+        
+        if (typeof data!== 'undefined') {
+            mydata = data;
+            localStorage.setItem('thetoken', mydata);
+        } else {
+
+        }
+
+        console.log("Access token:", localStorage.getItem('thetoken'));
 
         fetch(
           "https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate",
@@ -92,7 +106,7 @@
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer " + mydata,
+              Authorization: "Bearer " + localStorage.getItem('thetoken'),
             },
             body: JSON.stringify(requestBody_steps),
           }
