@@ -1,157 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="redirect.css" />
     <title>Document</title>
-  </head>
-  <body>
-    <h1 id="steps">Fetching data</h1>
-    <h2 id="calories">Fetching data</h2>
+</head>
 
-    <script>
-      // Get the authorization code from the URL query parameters
-      const code = new URLSearchParams(window.location.search).get("code");
+<body>
 
-      // Send a POST request to the token endpoint to exchange the code for an access token
-      const data = {
-        code: code,
-        client_id:
-          "643398672506-a5k2fjtmk0hsljf90qli3jiibebalpok.apps.googleusercontent.com",
-        client_secret: "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",
-        // redirect_uri: "http://localhost:5500/pwa/redirect.html",
-          redirect_uri: 'https://i481136.hera.fhict.nl/redirect.html',
-        grant_type: "authorization_code",
-      };
 
-      fetch("https://oauth2.googleapis.com/token", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
 
-          const accessToken = data.access_token;
-          caloriesData(accessToken);
-          stepsData(accessToken);
-          
-        });
-      //getting fitness data
+    <section id="dateSelectorSection">
+        <span id="dateSelectorButtonD" class="selectorButton selected">D</span>
+        <span id="dateSelectorButtonW" class="selectorButton">W</span>
+        <span id="dateSelectorButtonM" class="selectorButton">M</span>
+        <span id="dateSelectorButton6M" class="selectorButton">6 M</span>
+        <span id="dateSelectorButtonY" class="selectorButton">Y</span>
+    </section>
 
-      var endTimeMillis = new Date().getTime(); //right now
+    <section id="view">
+        <section id="viewD">
+            <span id="total">TOTAL</span>
+            <span id="steps">Fetching your step data</span>
+            <span id="stepsText">steps</span>
+            <span id="today">Today</span>
+        </section>
+    
+        <section id="viewAverage">
+            <span id="averageText"></span>
+            <span id="average"></span>
+            <span id="perDay"></span>
+        </section>
+    </section>
 
-      const today = new Date(); //start of the day
-      today.setHours(0, 0, 0, 0);
-      var startTimeMillis = today.getTime();
 
-      
+    
+    <h2 id="stepsweek"></h2>
+    <h2 id="calories"></h2>
 
-      function caloriesData(data) {
-
-        if (typeof data!== 'undefined') {
-            mydata = data;
-            localStorage.setItem('thetoken', mydata);
-        } else {
-
-        }
-
-        console.log("Access token:", localStorage.getItem('thetoken'));
-
-        fetch(
-          "https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem('thetoken'),
-            },
-            body: JSON.stringify(requestBody_calories),
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            var steps = data.bucket[0].dataset[0].point[0].value[0].fpVal;
-            let small_steps = steps.toFixed(0);
-            var stepsElement = document.getElementById("calories");
-            stepsElement.innerHTML = small_steps + " kcal";
-            console.log(small_steps);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-        console.log(steps);
-      }
-
-      function stepsData(data) {
+    <script src="/PWA/all.js">
         
-        if (typeof data!== 'undefined') {
-            mydata = data;
-            localStorage.setItem('thetoken', mydata);
-        } else {
-
-        }
-
-        console.log("Access token:", localStorage.getItem('thetoken'));
-
-        fetch(
-          "https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem('thetoken'),
-            },
-            body: JSON.stringify(requestBody_steps),
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            var steps = data.bucket[0].dataset[0].point[0].value[0].intVal;
-            var stepsElement = document.getElementById("steps");
-            stepsElement.innerHTML = steps + " steps";
-            console.log(steps);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-        console.log(steps);
-      }
-
-      var requestBody_calories = {
-        aggregateBy: [
-          {
-            dataTypeName: "com.google.calories.expended",
-            dataSourceId:
-              "derived:com.google.calories.expended:com.google.android.gms:merge_calories_expended",
-          },
-        ],
-        bucketByTime: { durationMillis: 86400000 },
-        startTimeMillis: startTimeMillis,
-        endTimeMillis: endTimeMillis,
-      };
-
-      var requestBody_steps = {
-        aggregateBy: [
-          {
-            dataTypeName: "com.google.step_count.delta",
-            dataSourceId:
-              "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps",
-          },
-        ],
-        bucketByTime: { durationMillis: 86400000 },
-        startTimeMillis: startTimeMillis,
-        endTimeMillis: endTimeMillis,
-      };
-
     </script>
-  </body>
+</body>
+
 </html>
