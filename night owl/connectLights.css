@@ -1,0 +1,84 @@
+body {
+    background-color: #0A2647;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Karla', sans-serif;
+    color: white;
+    margin-top: 30px;
+    
+}
+
+#textConnectToLights {
+    font-size: 30px;
+    width: 100%;
+}
+
+#textGoBack {
+    
+    display: block;
+    font-size: 15px;
+}
+
+#arrow-left {
+    height: 20px;
+    width: auto;
+    margin-left: -5px;
+}
+
+#flex {
+    align-items: flex-start;
+    margin-top: 10px;
+    display: flex;
+}
+
+#textUseThisIP {
+    background-color: #2C74B3;
+    padding: 10px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+#ipInput {
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    border: none;
+}
+
+#ipInputSection {
+    margin-top: 50px;
+    display: flex;
+    
+}
+
+#connect {
+    background-color: #2C74B3;
+    padding: 5px;
+    margin-top: 10px;
+    display: block;
+}
+
+#turnon {
+    margin-top: 30px;
+    display: block;
+    background-color: #2C74B3;
+    padding: 10px;
+}
+
+#navBar {
+    position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #2C74B3;
+  color: #333;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+#homeIcon {
+    height: 40px;
+    width: auto;
+    margin-top: 10px;
+}

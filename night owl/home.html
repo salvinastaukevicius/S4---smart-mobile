@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Document</title>
+    <link rel="stylesheet" href="/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="manifest"
+        href="manifest.json">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <span id="dayNameOfToday">Today</span>
+    <span id="dayAndMonth"> Day and month</span>
+
+    <section id="stats">
+        <section id="quality">
+            <span id="textQuality">Quality</span>
+            <span id="line"></span>
+        </section>
+        <section id="sleepGoal">
+            <span id="textSleepGoal">Sleep goal</span>
+            <span id="line"></span>
+        </section>
+        <section id="wentToBed">
+            <span id="textWentToBed">Went to bed</span>
+            <span id="timeGo">00:00 AM</span>
+        </section>
+        <section id="wokeUp">
+            <span id="textWokeUp">Woke up</span>
+            <span id="timeWake">00:00 PM</span>
+        </section>
+        <section id="sleepTime">
+            <span id="textSleepTime">Sleep time</span>
+            <span id="setSleepTime">10h 34m</span>
+        </section>
+    </section>
+
+    <section id="lightControl">
+        <section id="lightControlInner">
+            <span id="turnOn">Turn On</span>
+            <img id="lightBulb" src="/Philips_Hue.png" alt="light bulb">
+            <span id="turnOff">Turn off</span>
+        </section>
+    </section>
+
+
+
+
+    <section id="navBar"> 
+        <img id="homeIcon" src="/sleep-icon.svg" onclick="redirectToSleep()" ></img>
+        <img id="homeIcon" src="/home-icon1.svg" onclick="redirectToHome()"></img>
+        <img id="homeIcon" src="/profile-icon1.svg" onclick="redirectToProfile()"></img>
+    </section>
+
+    <script>
+        window.addEventListener('load', () => {
+          registerSW();
+        });
+     
+        // Register the Service Worker
+        async function registerSW() {
+          if ('serviceWorker' in navigator) {
+            try {
+              await navigator
+                    .serviceWorker
+                    .register('serviceworker.js');
+            }
+            catch (e) {
+              console.log('SW registration failed');
+            }
+          }
+        }
+     </script>
+    <script src="/home.js"> </script>
+    <script src="/connectLights.js"></script>
+</body>
+</html>

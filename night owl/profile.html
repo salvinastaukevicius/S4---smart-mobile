@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/profile.css">
+</head>
+
+<body>
+    <section id="settingsSection">
+        <span id="textSettings">Settings</span>
+
+        <section id="flex">
+            <span id="textSettingsLabels">About me</span>
+            <img id="image-arrow" src="/arrow-right.svg" alt="arrow">
+        </section>
+
+        <section id="flex">
+            <span id="textSettingsLabels">Sleep settings</span>
+            <img id="image-arrow" src="/arrow-right.svg" alt="arrow">
+        </section>
+
+        <section id="flex">
+            <span onclick="redirectToLights()" id="textSettingsLabels">Connect your lights</span>
+            <img id="image-arrow" src="/arrow-right.svg" alt="arrow">
+        </section>
+
+        <section id="flex">
+            <span id="textSettingsLabels">Language</span>
+            <span id="textEnglish">English</span>
+        </section>
+    </section>
+
+    <section id="navBar"> 
+        <img id="homeIcon" src="/sleep-icon.svg" onclick="redirectToSleep()" ></img>
+        <img id="homeIcon" src="/home-icon1.svg" onclick="redirectToHome()"></img>
+        <img id="homeIcon" src="/profile-icon1.svg" onclick="redirectToProfile()"></img>
+    </section>
+
+    <script src="profile.js"></script>
+</body>
+
+</html>
